@@ -21,16 +21,18 @@ const sections = [
 function Account() {
   const [userData, setUserData] = useState(null);
   const [selected, setSelected] = useState('Details');
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const data = JSON.parse(sessionStorage.getItem('user'));
     if (data && Array.isArray(data) && data.length > 0) {
       setUserData(data[0]);
+      setOrders(data[0]?.orders);
     } else {
       setUserData(null);
     }
   }, []);
-   console.log(userData)
+  console.log(orders)
   const formatDateToIST = (utcDate) => {
     if (!utcDate) return '-';
     return new Date(utcDate).toLocaleString('en-IN', {
@@ -56,8 +58,62 @@ function Account() {
             <p><strong>Created At:</strong> {formatDateToIST(userData?.created_at)}</p>
           </div>
         );
-      case 'Orders':
-        return <p>{}</p>;
+    case 'Orders':
+  return (
+    <div className="space-y-4">
+      {orders && orders.length > 0 ? (
+        orders.map((order, index) => (
+          <div
+            key={index}
+            className=" rounded-lg p-4 shadow-sm bg-white space-y-2"
+          >
+            <p className="font-semibold text-pink-600 mb-2 flex items-center gap-2">
+              <HiOutlineShoppingBag className="text-pink-600" />
+              Order {index + 1}
+            </p>
+
+            <div className="space-y-1 text-sm">
+              {order.items.map((item, idx) => (
+                <p key={idx} className="flex items-center gap-2">
+                  <HiOutlineGift className="text-green-600" />
+                  {item.name} — Qty: {item.quantity} — ₹{item.total}
+                </p>
+              ))}
+
+              <p className="flex items-center gap-2">
+                <HiOutlineCreditCard className="text-blue-600" />
+                Total: ₹{order.total_amount}
+              </p>
+
+              <p className="flex items-center gap-2">
+                📅 Placed:
+                <span>{formatDateToIST(order.placed_at)}</span>
+              </p>
+
+              <p className="flex items-center gap-2">
+                🚚 Dispatch:
+                <span>{formatDateToIST(order.dispatch_date)}</span>
+              </p>
+
+              <p className="flex items-center gap-2">
+                📦 Delivery:
+                <span>{formatDateToIST(order.delivery_date)}</span>
+              </p>
+
+              <p className="flex items-center gap-2 text-green-700 font-medium">
+                ✅ Status: {order.status}
+              </p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No orders found.</p>
+      )}
+    </div>
+  );
+
+
+
       case 'Coupons':
         return <p>No coupons available.</p>;
       case 'Payment Methods':
@@ -129,11 +185,10 @@ function Account() {
                 <button
                   key={name}
                   onClick={() => setSelected(name)}
-                  className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium transition ${
-                    selected === name
+                  className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium transition ${selected === name
                       ? 'bg-[#F76B8A] text-white'
                       : 'text-gray-600 hover:bg-pink-100'
-                  }`}
+                    }`}
                 >
                   <Icon className="mr-2 text-lg" />
                   {name}
