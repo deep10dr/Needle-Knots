@@ -30,7 +30,7 @@ function Account() {
       setUserData(null);
     }
   }, []);
-
+   console.log(userData)
   const formatDateToIST = (utcDate) => {
     if (!utcDate) return '-';
     return new Date(utcDate).toLocaleString('en-IN', {
@@ -57,7 +57,7 @@ function Account() {
           </div>
         );
       case 'Orders':
-        return <p>You haven't placed any orders yet.</p>;
+        return <p>{}</p>;
       case 'Coupons':
         return <p>No coupons available.</p>;
       case 'Payment Methods':

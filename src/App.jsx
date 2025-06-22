@@ -9,6 +9,7 @@ import SignUp from './assets/pages/SignUp'
 import Cart from './assets/pages/Cart'
 import UploadItems from './assets/pages/UploadItems'
 import ProductDetails from './assets/pages/ProductDetails'
+import Buy from './assets/pages/buy'
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
         <Route path='/cart' element={<Cart />} />
         <Route path='/uploaditems' element={admin ? <UploadItems /> : <Error />} />
         <Route path='/product/:id' element={<ProductDetails />} />
+        <Route path='/buy/:id' element={<Buy />} />
+      
       </Routes>
     </BrowserRouter>
   )

@@ -233,6 +233,9 @@ function ProductDetails() {
                                             if (!userId) {
                                                 showAlert(<p>Please <span className='underline cursor-pointer' onClick={() => { navigate('/login') }}>login</span>  or <span className='underline cursor-pointer' onClick={() => { navigate('/signup') }}>sign</span>  in to continue purchase</p>, 'error');
                                             }
+                                            else{
+                                                navigate(`/buy/${id}`);
+                                            }
                                         }}
                                     >
                                         <FaBolt /> Buy Now

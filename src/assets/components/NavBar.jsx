@@ -35,7 +35,7 @@ function NavBar({ onCategorySelect }) {
       {/* Desktop Nav */}
       <div className="hidden md:flex flex-col">
         <div className="flex items-center justify-between px-4 py-2">
-          <h1 className="text-2xl font-extrabold text-[#F76B8A] cursor-pointer" onClick={() => navigate("/home")}>Needle & Knots</h1>
+          <h1 className="text-2xl font-extrabold text-[#F76B8A] cursor-pointer" onClick={() => navigate("/")}>Needle & Knots</h1>
           <div className="flex items-center border rounded-2xl shadow-md overflow-hidden w-64 bg-[#FFFFFF]">
             <FiSearch className="cursor-pointer text-lg mx-2 text-[#2D2D2D] hover:text-[#F76B8A]" />
             <input
