@@ -9,7 +9,7 @@ import SignUp from './assets/pages/SignUp'
 import Cart from './assets/pages/Cart'
 import UploadItems from './assets/pages/UploadItems'
 import ProductDetails from './assets/pages/ProductDetails'
-import Buy from './assets/pages/buy'
+import Buy from './assets/pages/Buy'
 
 
 function App() {
